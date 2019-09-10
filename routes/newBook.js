@@ -20,30 +20,27 @@ router.get('/books/new', (req, res) => {
     }
 });
 
-// add book to database
+// adds book to database
 router.post('/books/new', (req, res) => {
-    console.log("it's posting");
 
     (async () => {
         try { 
-            console.log(req)
             const newBook = await Book.create({
-                title: 'New Book',
-                author: 'New Author',
-                genre: 'Fiction',
-                year: 2019
+                title: req.body.title,
+                author: req.body.author,
+                genre: req.body.genre,
+                year: req.body.year,
             })
-            console.log(newBook.toJSON());
             res.redirect('/');
 
         } catch (error) {
+            // re-renders form with error message and req.body info
             if (error.name === 'SequelizeValidationError') { 
-                const errors = error.errors.map(err => err.message);
-                console.log('Validation errors: ', errors);
+                const bookDeets = req.body
+                const errors = error.errors;
+                res.render('formError', {bookDeets, errors});
             } else {
-                console.error(error)
-                error.message = 'Book not added';
-                next(error);
+                res.render('error')
             }
         }
     })();

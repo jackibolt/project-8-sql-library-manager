@@ -1,0 +1,29 @@
+extends layout
+
+block title
+    title Create or Update a Book
+
+block content
+    h1 Create or Update a Book
+    form
+        h2.error Oooops!
+        p.error The records were not updated.
+        ul.error
+            li Author is required
+            li Name is required
+        p
+            label(for='title') Title
+            input#title(name='title' type='text' value=bookDeets.title)
+        p
+            label(for='author') Author
+            input#author(name='author' type='text' value=bookDeets.author)
+        p
+            label(for='genre') Genre
+            input#genre(name='genre' type='text' value=bookDeets.genre)
+        p
+            label(for='year') Year
+            input#year(name='year' type='text' value=bookDeets.year)
+        p
+            input(type='submit' value='Create New Book')
+        p
+            a.button(href='/') Cancel

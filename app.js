@@ -36,6 +36,28 @@ app.use(bookDeets);
 
 
 
+/////// MAIN ERROR HANDLERS ////////
+
+// 404 error handler
+app.use((req, res, netxt) => {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+})
+
+// renders error page
+app.use(( err, req, res, next ) => {
+    res.locals.error = err;
+    res.status = err.status;
+    if (res.status === undefined) {
+        err.status = 500;
+    }
+    res.render('pageNotFound');
+});
+
+/////// END OF ERROR HANDLERS ///////
+
+
 
 // starts the local server
 app.listen(3000, () => {
