@@ -36,9 +36,10 @@ router.post('/books/new', (req, res) => {
         } catch (error) {
             // re-renders form with error message and req.body info
             if (error.name === 'SequelizeValidationError') { 
-                const bookDeets = req.body
                 const errors = error.errors;
-                res.render('formError', {bookDeets, errors});
+                const book = req.body;
+                book.id = req.params.id;                
+                res.render('newBook', {errors, book});
             } else {
                 res.render('error')
             }

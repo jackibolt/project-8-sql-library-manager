@@ -12,7 +12,7 @@ router.get('/books', (req, res) => {
             const books = await Book.findAll();
             res.render('index', {books})
 
-        } catch {
+        } catch (error) {
             res.render('error');
         }
 

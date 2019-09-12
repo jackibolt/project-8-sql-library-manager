@@ -60,6 +60,6 @@ app.use(( err, req, res, next ) => {
 
 
 // starts the local server
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log("we're up and running on localhost:3000!");
 });
